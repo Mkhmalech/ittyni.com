@@ -11,7 +11,7 @@ import { History } from "history";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
-import { Home } from './website'
+import { Home } from './website/index'
 
 
 interface MainProps {
