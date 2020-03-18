@@ -1,12 +1,22 @@
 import { css } from "."
 
-export const media = {
-    lessThan(breakpoint: string, print?: boolean){
-        return (...args : any[]) => css`
-            @media ${print ? 'print, ' : ''} screen and (max-width: ${(props: any) =>
-                props.theme.breakpoints[breakpoint]}) {
-              ${(css as any)(...args)};
-            }
-        `
-    }
-}
+export const mobile = (args : any, theme? : any) => css`
+  @media (max-width: 576px) {
+    ${css(args, theme)};
+  }
+`
+export const tablet = (args : any, theme? : any) => css`
+  @media (min-width: 576px) and (max-width: 768px) {
+    ${css(args, theme)};
+  }
+`
+export const desktop = (args: any, theme? : any) => css`
+  @media (min-width: 768) and (max-width: 992px){
+    ${css(args, theme)};
+  }
+`
+export const largeDesktop = (args: any, theme? : any) => css`
+  @media (min-width: 992px) and (max-width: 992px){
+    ${css(args, theme)};
+  }
+`

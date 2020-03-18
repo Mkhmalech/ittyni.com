@@ -12,6 +12,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
 import { Home } from './website/index'
+import { routes } from './routes';
+import Admin from './admin'
 
 
 interface MainProps {
@@ -27,7 +29,10 @@ const Main: React.FC<MainProps> = ({ store, history }) => {
                 <Provider store={store}>
                     <Router history={history}>
                         <Switch>
-                            <Route path="/" component={Home} />
+                            <Route path={routes.admin.path} component={Admin} />                            
+                            <Route path={routes.auth.path} component={()=>(<div>auth</div>)} />
+                            <Route path={routes.website.path} component={Home} />
+                            <Redirect to={routes.website.path} />
                         </Switch>
                     </Router>
                 </Provider>

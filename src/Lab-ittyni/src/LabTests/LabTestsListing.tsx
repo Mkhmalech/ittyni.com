@@ -1,8 +1,8 @@
-import * as React from '../../../../administration/Dashboard/node_modules/react';
+import * as React from 'react';
 import { createGlobalStyle } from '../../../../theme';
 
 import LabTestsContext from '../../../../context/Lab/LabTestsContext'
-import { connect } from '../../../../administration/Lab/LabTest/node_modules/react-redux';
+import { connect } from 'react-redux';
 import { IttyniState } from '../../../../store';
 import { LabTestsState } from '../../../../store/webSite/home/types';
 import { TestList } from '../../../../components/Listing/Listing'
