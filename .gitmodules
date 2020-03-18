@@ -1,0 +1,12 @@
+[submodule "Lab-ittyni"]
+	path = src/Lab-ittyni
+	url = git@github.com:Mkhmalech/Lab-ittyni.git
+[submodule "src/react-icons-sc"]
+	path = src/react-icons-sc
+	url = git@github.com:Mkhmalech/react-icons-sc.git
+[submodule "src/ui-ittyni"]
+	path = src/ui-ittyni
+	url = git@github.com:Mkhmalech/ui-ittyni.git
+[submodule "src/authentification-redux-lib"]
+	path = src/authentification-redux-lib
+	url = https://github.com/Mkhmalech/authentification-redux-lib.git
