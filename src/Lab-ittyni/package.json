@@ -2,7 +2,7 @@
   "name": "lab-ittyni",
   "version": "1.0.0",
   "description": "",
-  "types": "lab.d.ts",
+  "types": "src/lab.d.ts",
   "main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
