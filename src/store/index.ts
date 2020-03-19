@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 
 // import reducers and states
 import  webReducers, { WebState }  from './webSite'
-import  AuthReducers, { AuthStates }  from './Auth'
+// import  AuthReducers from './Auth'
 import adminReducers,  { AdminState } from './Admin'
 
 // import sagas 
@@ -24,7 +24,7 @@ import { fork, all } from 'redux-saga/effects'
 export interface IttyniState {
     adminStates : AdminState
     WebStates   : WebState
-    AuthStates  : AuthStates
+    // AuthStates  : AuthStates
     router      : RouterState
 }
 
@@ -32,7 +32,7 @@ export const createRootReducer = (history : History)=>
     combineReducers({
         adminStates  : adminReducers,
         WebStates    : webReducers,
-        AuthStates   : AuthReducers,
+        // AuthStates   : AuthReducers,
         router: connectRouter(history)
     })
 //==============>rootReducer end
