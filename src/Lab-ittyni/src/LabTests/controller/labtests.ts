@@ -3,7 +3,7 @@ export class labtests {
 
 
 
-    constructor(token : AuthToken){
+    constructor(token : String){
 
     }
 }
