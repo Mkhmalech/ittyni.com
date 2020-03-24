@@ -2,6 +2,8 @@ import * as React from 'react';
 import { store } from '..';
 import styled from '../theme/styled-components';
 import { device } from '../theme';
+import { routes } from '../routes';
+import { Route } from 'react-router-dom';
 
 
 
@@ -15,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ isAuthPage, children }) => {
     <>
       <Logo className="ittyniLogo">i<span style={{ color: 'red' }}>TT</span>yni</Logo>
       <SearchBox >
-        <Search />
+        <Route path={routes.website.labTests.path} component={routes.website.labTests.search} />
       </SearchBox>
       <UserNav>
         {/* <LoginIcon/> */}
@@ -52,39 +54,6 @@ const SearchBox = styled.div.attrs({className : "searchBox"})`
   flex : 5;
   padding : 15px 0 0;
 `;
-const SearchIcon = styled.i`
-  left: auto;
-  right: 15px;
-  float: right;
-  position: absolute;
-  margin: 7px 2px 4px 10px;
-  z-index: 3;
-  width: 16px;
-  font-size: 25px;
-  text-align: center;
-`;
-const SearchInput = styled.input`
-    padding-right: 33px;
-    padding-left: 12px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    width: 100%;
-
-    @media (max-width: 768px) {
-        width : 100% !important;
-    }
-`;
-const Search = () => {
-  return (
-    <div style={{ position: "relative", display : "flex" }}>
-      <SearchIcon className="fa fa-search font-green"></SearchIcon>
-      <SearchInput type="text"
-        placeholder="Chercher Une ou Plusieurs Analyses"
-        onChange={e=> store.dispatch({type : "LABTEST_SEARCH_FRENCH_NAME_MNEMONIC", query : e.target.value})}
-      />
-    </div>
-  )
-}
 
 const LoginIcon = styled((props : { className? : string}) => (
   <svg

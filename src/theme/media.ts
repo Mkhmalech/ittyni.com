@@ -16,7 +16,7 @@ export const desktop = (args: any, theme? : any) => css`
   }
 `
 export const largeDesktop = (args: any, theme? : any) => css`
-  @media (min-width: 992px) and (max-width: 992px){
+  @media (min-width: 992px) and (max-width: 1280px){
     ${css(args, theme)};
   }
 `

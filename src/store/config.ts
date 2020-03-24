@@ -1,3 +1,5 @@
+export const api = 'http://localhost:8080';
+
 export async function callApi(method: string, url: string, path: string, data?: any) {
     const res = await fetch(`${url}/${path}`, {
       method,

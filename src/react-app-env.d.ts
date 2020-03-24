@@ -1,7 +1,11 @@
 /* eslint-disable spaced-comment, @typescript-eslint/no-explicit-any */
 /// <reference types="react-scripts" />
+/// <reference types="redux" />
 /// <reference types="./Lab-ittyni" />
-/// <reference path="./authentification-redux-lib/src/auth.d.ts" />
+/// <reference types="./authentification-redux-lib" />
+/// <reference types="./ui-ittyni" />
+
+type Test = string
 
 interface Window {
     INITIAL_REDUX_STATE: any

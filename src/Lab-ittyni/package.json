@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mkhmalech/Lab-ittyni.git"
+    "url": "git+https://github.com/Mkhmalech/lab-ittyni.git"
   },
   "author": "khm@med",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mkhmalech/Lab-ittyni/issues"
+    "url": "https://github.com/Mkhmalech/lab-ittyni/issues"
   },
-  "homepage": "https://github.com/Mkhmalech/Lab-ittyni#readme"
+  "homepage": "https://github.com/Mkhmalech/lab-ittyni#readme"
 }

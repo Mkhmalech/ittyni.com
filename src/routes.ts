@@ -1,5 +1,7 @@
-import { labRoutes } from './Lab-ittyni/src/routes';
-import { LabTestsListing } from './Lab-ittyni/src/LabTests/web/LabTestListing'
+import  LabTestsListing  from './lab-ittyni/src/labTests/web/LabTestListing'
+import  {LabTestSearch}  from './lab-ittyni/index'
+import { LabTestDetail } from './lab-ittyni/src/labTests/web/LabTestDetail';
+import { AuthComponent } from './authentification-redux-lib/src/web'
 export const routes = {
     admin : {
         path : '/admin/:user/*',
@@ -7,14 +9,17 @@ export const routes = {
     website : {
         path : '/website',
         labTests : {
-            path : '/website/analyses_medicales/Listes_prix_analyses_medicales/maroc',
+            path : '/website/analyses-medicales/Listes-prix-analyses-medicales/maroc',
             component : LabTestsListing,
-            title : 'Listes prix analyses medicales',
-            description : 'prix et tarif des analyses medicales et des tests biologiques au maroc',
-            keywords : 'prix, tarif, analyses, medicales, test, biologiques'
+            search : LabTestSearch
+        },
+        labTestDetail : {
+            path : '/website/analyses-medicales/:test',
+            component : LabTestDetail
         }
     },
     auth : {
-        path : '/auth'
+        path : '/website/auth/*',
+        component : AuthComponent
     }
 }

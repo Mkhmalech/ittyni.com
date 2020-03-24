@@ -23,10 +23,10 @@ interface LabTestsRoutes {
 }
 
 interface LabLaboRoutes {
-    LabLabos : {
-        Morroco : RouteData
-    },
-    LabLaboDetails : RouteData
+  LabLabos: {
+    Morroco: RouteData;
+  };
+  LabLaboDetails: RouteData;
 }
 interface LabRoutes {
   LabTests: LabTestsRoutes;
@@ -34,6 +34,88 @@ interface LabRoutes {
   Equipements?: RouteData;
 }
 // Lab -----> Tests typing file <-----
+/**
+ * @nameoftes
+ */
+type LabTestNameFr = string;
+type LabTestNameEn = string;
+
+/**
+ * @labtesReferance
+ */
+type LabTestReferenceCode = Number;
+type LabTestReferenceMnemonic = string;
+type LabTestReferenceCPT = Number;
+
+/**
+ * @labtestfinance
+ */
+type LabTestFinanceCountry = string;
+type LabTestFinanceBcode = number;
+
+/**
+ * @labtestclassification
+ */
+type LabTestClassificationPanels = string;
+type LabTestClassificationDepartement = string;
+type LabTestClassificationMolecule = string;
+
+/**
+ * @labtestspicement
+ */
+type LabTestSpecimenNature = string;
+type LabTestSpecimenTubeColor = string;
+type LabTestSpecimenAnticoagulant = string;
+type LabTestSpecimenNumberoftube = number;
+type LabTestSpecimenVolumeMin = number;
+type LabTestSpecimenStabilityTime = number;
+type LabTestSpecimenStabilityTemperature = number;
+
+interface LabTestReference {
+  code: LabTestReferencecode;
+  Mnemonic: LabTestReferenceMnemonic;
+  CPT: LabTestReferenceCPT;
+}
+
+interface LabTestNames {
+  en: LabTestNameEn;
+  fr?: LabTestNameFr;
+}
+
+interface LabTestFinance {
+  country: LabTestFinancecountry;
+  Bcode: LabTestFinanceBcode;
+}
+
+interface LabTestClassification {
+  Panels?: LabTestClassificationPanels;
+  Departement: LabTestClassificationDepartement;
+  Molecule: LabTestClassificationMolecule;
+}
+
+interface LabTestSpecimen {
+  nature?: LabTestSpecimenNature[];
+  tubeColor?: LabTestSpecimenTubeColor[];
+  anticoagulant?: LabTestSpecimenAnticoagulant[];
+  numberoftube?: LabTestSpecimenNumberoftube;
+  volumemin?: LabTestSpecimenVolumeMin;
+  stability?: {
+    time: LabTestSpecimenStabilityTime;
+    temperature: LabTestSpecimenStabilityTemperature;
+  };
+}
+
+interface LabTest {
+  reference?: LabTestReference;
+  name?: LabTestNames;
+  finance?: LabTestFinance[];
+  classification?: LabTestClassification;
+  specimen?: LabTestSpecimen;
+}
+
+interface LabTest extends LabTest {
+  updates?: LabTest[];
+}
 
 // Lab -----> Labos typing file <-----
 
@@ -77,7 +159,6 @@ interface LabLaboCatalogList {
   testID: string;
   update?: LabLaboCatalogListTest[];
 }
-
 interface LabLaboCatalog {
   list: LabLaboCatalogList[];
 }
@@ -100,49 +181,27 @@ interface ILabo {
   affiliate: LabLaboAffiliate;
 }
 
-//--- Lab --------> LabTest typing
-
-interface Reference {
-  code: Number;
-  Mnemonic: String;
-  CPT: Number;
+/****************************************
+ *********   Lab States  ************
+ ****************************************/
+/**
+ * labTestState {
+ *  @labtests
+ * }
+ */
+interface LabTestState {
+  labtests?: LabTest[];
 }
 
-interface Names {
-  en: String;
-  fr?: String;
-}
+interface LabLaboState {}
 
-interface Finance {
-  country: String;
-  Bcode: Number;
-}
+interface LabEquipementState {}
 
-interface Classification {
-  Panels?: String;
-  LabDepartement: String;
-  Molecule: String;
-}
+interface LabStaffState {}
 
-interface Specimen {
-  nature?: String[];
-  tubeColor?: String[];
-  anticoagulant?: String[];
-  numberoftube?: Number;
-  volumemin?: Number;
-  stability?: {
-    time: Number;
-    temperature: Number;
-  };
-}
-
-interface Method {}
-
-interface LabTest {
-  name: Names;
-  reference: Reference;
-  finance: Finance;
-  classification: Classification;
-  specimen: Specimen;
-  methode: Method;
+interface LabState {
+  test?: LabTestState;
+  labo?: LabLaboState;
+  equipement?: LabEquipementState;
+  staff?: LabStaffState;
 }

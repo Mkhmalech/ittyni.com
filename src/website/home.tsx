@@ -22,7 +22,7 @@ export const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
             <HomeLink to="/website"> Home </HomeLink>
 
-            <LoginLink to="/admin/user/">
+            <LoginLink to={`/website/auth/login`}>
               <LoginLinkIcon>
                 {/* <LoginIcon /> */}
               </LoginLinkIcon>
@@ -35,12 +35,15 @@ export const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
           <Wrapper.MainContent>
 
-            <Route path={routes.website.labTests.path} component={routes.website.labTests.component}/>
-            <Redirect to={routes.website.labTests.path} />
+            <Route path={routes.auth.path} component={routes.auth.component} exact/>
+
+            <Route path={routes.website.labTests.path} component={routes.website.labTests.component} />
+
+            <Route path={routes.website.labTestDetail.path} component={routes.website.labTestDetail.component} exact/>
 
           </Wrapper.MainContent>
           <Wrapper.MainSide>
-            Menu
+  
           </Wrapper.MainSide>
 
         </Wrapper.Main>       

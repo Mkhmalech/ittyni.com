@@ -1,37 +1,37 @@
 import { RouterState, connectRouter } from 'connected-react-router'
 import { History } from 'history'
 import { combineReducers } from 'redux'
-
+import { rootLabReducer, LabTestSaga } from '../lab-ittyni/index'
 // import reducers and states
-import  webReducers, { WebState }  from './webSite'
-// import  AuthReducers from './Auth'
-import adminReducers,  { AdminState } from './Admin'
+// import  webReducers, { WebState }  from './webSite'
+// // import  AuthReducers from './Auth'
+// import adminReducers,  { AdminState } from './Admin'
 
-// import sagas 
-//===> from Auth Pages  
-import LoginSaga from './Auth/Login/saga'
+// // import sagas 
+// //===> from Auth Pages  
+// import LoginSaga from './Auth/Login/saga'
 
-//===> from Web App Pages
-import LabTestsListingSaga from './webSite/home/saga'
+// //===> from Web App Pages
+// import LabTestsListingSaga from './webSite/home/saga'
 
-//===> from Administration
-import LabTestsListingAdminSaga from './Admin/Lab/LabTests/saga'
+// //===> from Administration
+// import LabTestsListingAdminSaga from './Admin/Lab/LabTests/saga'
 
 //===> from saga middleware
 import { fork, all } from 'redux-saga/effects'
 
 
 export interface IttyniState {
-    adminStates : AdminState
-    WebStates   : WebState
+     labState : LabState
+    // WebStates   : WebState
     // AuthStates  : AuthStates
     router      : RouterState
 }
 
 export const createRootReducer = (history : History)=>
     combineReducers({
-        adminStates  : adminReducers,
-        WebStates    : webReducers,
+        labState        : rootLabReducer,
+        // WebStates    : webReducers,
         // AuthStates   : AuthReducers,
         router: connectRouter(history)
     })
@@ -39,13 +39,13 @@ export const createRootReducer = (history : History)=>
 
 export function* rootSaga(){
     yield all([
-        //Auth Sagas
-        fork(LoginSaga), 
+        //lab Test Sagas
+        fork(LabTestSaga), 
 
-        //web application sagas
-        fork(LabTestsListingSaga),
+        // //web application sagas
+        // fork(LabTestsListingSaga),
 
-        //Administration Sagas
-        fork(LabTestsListingAdminSaga)
+        // //Administration Sagas
+        // fork(LabTestsListingAdminSaga)
     ])
 }
