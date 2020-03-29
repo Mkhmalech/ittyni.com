@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 import { rootLabReducer, LabTestSaga } from '../lab-ittyni/index'
 // import reducers and states
 // import  webReducers, { WebState }  from './webSite'
-// // import  AuthReducers from './Auth'
+import  AuthReducers from '../authentification-redux-lib/src/store/reducer'
 // import adminReducers,  { AdminState } from './Admin'
 
 // // import sagas 
@@ -19,12 +19,16 @@ import { rootLabReducer, LabTestSaga } from '../lab-ittyni/index'
 
 //===> from saga middleware
 import { fork, all } from 'redux-saga/effects'
+import AuthSaga from '../authentification-redux-lib/src/store/saga'
+import { admin, sidebar } from '../admin/common/adminWrappers';
+import { adminReducer } from '../admin/store/reducers';
 
 
 export interface IttyniState {
-     labState : LabState
+     labState   : LabState
     // WebStates   : WebState
-    // AuthStates  : AuthStates
+    Auth        : AuthState
+    admin       : AdminState
     router      : RouterState
 }
 
@@ -32,7 +36,8 @@ export const createRootReducer = (history : History)=>
     combineReducers({
         labState        : rootLabReducer,
         // WebStates    : webReducers,
-        // AuthStates   : AuthReducers,
+        admin           : adminReducer,
+        Auth   : AuthReducers,
         router: connectRouter(history)
     })
 //==============>rootReducer end
@@ -42,8 +47,8 @@ export function* rootSaga(){
         //lab Test Sagas
         fork(LabTestSaga), 
 
-        // //web application sagas
-        // fork(LabTestsListingSaga),
+        // web application sagas
+        fork(AuthSaga),
 
         // //Administration Sagas
         // fork(LabTestsListingAdminSaga)

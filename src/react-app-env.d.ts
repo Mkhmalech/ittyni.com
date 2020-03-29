@@ -4,6 +4,7 @@
 /// <reference types="./Lab-ittyni" />
 /// <reference types="./authentification-redux-lib" />
 /// <reference types="./ui-ittyni" />
+/// <reference types="./admin" />
 
 type Test = string
 

@@ -29,7 +29,7 @@ const Main: React.FC<MainProps> = ({ store, history }) => {
                 <Provider store={store}>
                     <Router history={history}>
                         <Switch>
-                            {/* <Route path={routes.admin.path} component={Admin} />*/}
+                            <Route path={routes.admin.path} component={Admin} />
                             <Route path={routes.website.path} component={Home} />
                             <Redirect to={routes.website.path} />
                         </Switch>

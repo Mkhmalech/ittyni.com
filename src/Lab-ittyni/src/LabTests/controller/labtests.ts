@@ -5,9 +5,9 @@ import { store } from '../../../../index';
 export class Labtests {
 
     // private dispatch : Dispatch 
-    private token : AuthToken
+    private token : string
 
-    constructor(token : AuthToken){
+    constructor(token : string){
         this.token = token
     }
 

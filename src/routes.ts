@@ -1,10 +1,10 @@
 import  LabTestsListing  from './lab-ittyni/src/labTests/web/LabTestListing'
 import  {LabTestSearch}  from './lab-ittyni/index'
 import { LabTestDetail } from './lab-ittyni/src/labTests/web/LabTestDetail';
-import { AuthComponent } from './authentification-redux-lib/src/web'
+import  Auth  from './authentification-redux-lib/src/web'
 export const routes = {
     admin : {
-        path : '/admin/:user/*',
+        path : '/admin/:user/',
     },
     website : {
         path : '/website',
@@ -20,6 +20,11 @@ export const routes = {
     },
     auth : {
         path : '/website/auth/*',
-        component : AuthComponent
+        component : Auth
+    },
+
+    lab : {
+        
     }
+
 }

@@ -1,69 +1,106 @@
-// import * as React from 'react';
-// import { connect } from 'react-redux';
-// import { useRouteMatch, useHistory, Link } from 'react-router-dom';
-// import { routes } from '../routes';
-// import { IttyniState } from '../store/index';
-// import { AdminState } from '../store/Admin/index';
+/*** admin module for ittyni.com v1.0.0 ************
+ * 
+ * created by @khmamed
+ *  
+ * @TODO
+ * 
+ */
+
+import * as React from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import * as Wrapper from './common/adminWrappers';
+import { Globals } from './common/adminWrappers';
+import Dock from './Docks';
+import { Profile } from '../ittyni-user/src/admin/profile';
+import { connect } from 'react-redux';
+import { IttyniState } from '../store/index';
+import * as  User  from '../ittyni-user/src/admin/User';
+import { labRoutes } from '../lab-ittyni/src/routes';
+import { Sidebar } from '../lab-ittyni/src/labTests/admin/LabTest';
+import { Admin } from './controller/admin';
+
+interface IAppProps extends AuthLoginState, AdminState{
+}
+
+const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, userId, sidebar}) => {
+
+  // create a admin instance to control layout 
+  const admin = new Admin();
+  // if user is not logged in or user data is not available 
+  // return to authentification component
+  if (userId === undefined || !localStorage.getItem('TTUID')  ) {
+    return <Redirect to="/website/auth/login" />
+  } else {
+    // if authenticated continue
+    return (
+      <>
+        <Globals />
+        <Wrapper.admin>
 
 
-// interface IAdminLayoutProps {
-//     admin : AdminState
-// }
+          <Wrapper.header>
+            i<span style={{ color: 'red' }}>TT</span>yni
+          </Wrapper.header>
 
-// const AdminLayout: React.FC<IAdminLayoutProps> = ({admin}) => {
+          <Wrapper.container>
+          {/**
+           * @khmamed
+           * 
+           * docks layout 
+           * @TODO customize docks to be loadded from
+           * module and link to module pages
+           * module links pages and features 
+           * will be storage in a json file 
+           * 
+           */}
+            <Wrapper.dock > <Dock username={username ? username : 'undefned'} closeOpenSide={admin.adminSidebaeClose}/> </Wrapper.dock>
 
-//     console.log(admin)
-
-//     let adminPath = useRouteMatch(routes.admin.path);
-
-//     let history = useHistory();
-
-//     const {location : { pathname }} : any = history
-
-//     const handleClick=()=>{
-//         history.push('/auth');
-//         console.log("clicked")
-//     }
-
-    
-//     // verify user and token
-
-//         // display dashboard
-
-//         // display module chosen
-
-//     // return to auth if not connected
-
-//   return(
-//     <div>
-//         <Link 
-//             to={{
-//                 pathname : `${pathname}header`,
-//                 state : admin
-//             }}
-//         >
-//             Admin            
-//         </Link>
-//     </div>
-//   ) ;
-// };
+            <Wrapper.main closed={sidebar}>
+            {/**
+             * 
+             * @khmamed
+             * 
+             * sidebar for docks menu 
+             *
+             * @TODO link docks menu item to 
+             * corresponding pages 
+             *
+             */}
+              <Wrapper.sidebar >      
+                <Route path={`/admin/${username}/profile`} component={()=><User.Sidebar username ={username}/>} /> 
+                <Route path={labRoutes.LabTests.admin.link} component={Sidebar} />
+              </Wrapper.sidebar>
 
 
-// function Header(props : any){
-//     console.log(props)
-//     let headerPath = useRouteMatch(`/admin/:user/header`);
-//     console.log(headerPath)
-//     return<div>this is header</div>
-// }
+             {/*** module content *******
+              *  
+              * @TODO
+              * 
+              */
+             }
+              <Wrapper.content>
+                {/* <Wrapper.tabModule>ModuleTabs</Wrapper.tabModule> */}
+                <Wrapper.page>
 
+                    <Route path={`/admin/${username}/profile`} component={()=><Profile username ={username}/>} />
+                    <Route path={labRoutes.LabTests.admin.LabtestListAll.path} component={labRoutes.LabTests.admin.LabtestListAll.component} />
+                  
+                </Wrapper.page>
+              </Wrapper.content>
 
+            </Wrapper.main>
 
+          </Wrapper.container>
+        </Wrapper.admin>
+      </>
+    )
+  }
+};
 
-// const mapStateToprops = ({adminStates} : IttyniState) =>({
-//     admin : adminStates
-// })
-// const Admin = connect(mapStateToprops)(AdminLayout);
-
-// export default Admin;
-const Admin = {}
-export default Admin
+const mapStateToProps = ({Auth, admin} : IttyniState)=>({
+  isAuth : Auth.login? Auth.login.isAuth : false,
+  username : Auth.login? Auth.login.username : undefined,
+  userId : Auth.login? Auth.login.userId : undefined,
+  sidebar : admin.sidebar
+})
+export default connect(mapStateToProps)(AdminLayout);
