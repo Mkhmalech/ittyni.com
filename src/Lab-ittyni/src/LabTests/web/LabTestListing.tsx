@@ -11,7 +11,7 @@ export interface ILabTestsListingProps extends LabTestState{
 
 const LabTestsListing : React.FC<ILabTestsListingProps> =  ({labtests}) => {
 
-  const labtestClasse = new Labtests("token")
+  const labtestClasse = new Labtests()
 
   let data : ListData[] = [];
 

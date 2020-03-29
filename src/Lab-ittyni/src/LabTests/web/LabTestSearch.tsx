@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from "../../../../theme/styled-components";
 import { Labtests } from '../controller/labtests';
 
-const labtest = new Labtests('token')
+const labtest = new Labtests()
 
 export const LabTestSearch = () => {
     return (

@@ -1,21 +1,25 @@
-import { Dispatch } from "redux";
 import { LabTestActions } from '../store/actions';
 import { store } from '../../../../index';
 
 export class Labtests {
 
-    // private dispatch : Dispatch 
-    private token : string
+    private token : string | null = localStorage.getItem('TTUID')
 
-    constructor(token : string){
-        this.token = token
-    }
+    constructor(){}
+
+    labTestAllList = () => store.dispatch({
+        type : LabTestActions.LAB_TESTS_EN_FETCH,
+        payload : {
+            query : `query{AllLabTests_en{name{en fr}reference{Mnemonic} finance{Bcode}}}`
+        },
+        path:'tests'
+    })
 
     labTestsFetching = () =>
         store.dispatch({
             type : LabTestActions.LAB_TESTS_FR_FETCH,
             payload : { 
-                query : `query { AllLabTests_fr{ id name{ fr } finance{ Bcode } reference{ Mnemonic } specimen{ nature tubeColor anticoagulant numberoftube volumemin } } }` 
+                query : `query{AllLabTests_fr{id name{fr}finance{Bcode}reference{Mnemonic}specimen{nature tubeColor anticoagulant numberoftube volumemin}}}` 
             },
             path : 'tests'
         })

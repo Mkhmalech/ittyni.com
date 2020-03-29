@@ -1,4 +1,5 @@
 import * as Labtest from "./labTests/index";
+import LabTestListAll from "./labTests/admin/LabTestListAll";
 
 export const labRoutes  = {
     
@@ -26,7 +27,7 @@ export const labRoutes  = {
             LabtestListAll : {
                 path : '/admin/:user/lab/labtests',
                 title : 'LabTests',
-                component : Labtest.LabTestListAll
+                component : LabTestListAll
             }
         }
     },

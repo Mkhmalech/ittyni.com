@@ -191,6 +191,7 @@ interface ILabo {
  */
 interface LabTestState {
   labtests?: LabTest[];
+  labtestsAll?: LabTest[];
 }
 
 interface LabLaboState {}

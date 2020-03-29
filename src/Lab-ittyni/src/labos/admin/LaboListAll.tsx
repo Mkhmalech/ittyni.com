@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IttyniState } from '../../../../store/index';
-import { Labtests } from '../controller/labtests';
+import { Labos } from '../controller/Labos';
 import * as Table from '../../common/table'
 
 interface Props {
-    LabtestsList: []
+    LabosList: []
 }
 // list , filter and link to test details
-export const LabTestListAll = ({ LabtestsList }: any) => {
+export const LaboListAll = ({ LabosList }: any) => {
 
-    const labtest = new Labtests()
+    const Labo = new Labos()
 
-    if (LabtestsList.length <= 0) {
-        labtest.labTestAllList();
+    if (LabosList.length <= 0) {
+        Labo.LaboAllList();
         return <div>loading......</div>
     }
     else
@@ -22,7 +22,7 @@ export const LabTestListAll = ({ LabtestsList }: any) => {
             <Table.Container>
                 <Table.Content>
                     <Table.TBody>
-                        {LabtestsList.map((item: any) =>
+                        {LabosList.map((item: any) =>
                             <Table.ContentRow key={item.name.en}>
                                 <td style={{ flex: 9 }}>{item.name.en}</td>
                                 <td style={{ flex: 1 }}>{item.reference.Mnemonic}</td>
@@ -36,7 +36,7 @@ export const LabTestListAll = ({ LabtestsList }: any) => {
 }
 
 const mapStateToProps = ({ labState }: IttyniState) => ({
-    LabtestsList: labState.test ? labState.test.labtestsAll : undefined
+    LabosList: labState.test ? labState.test.LabosAll : undefined
 })
 
-export default connect(mapStateToProps)(LabTestListAll)
+export default connect(mapStateToProps)(LaboListAll)

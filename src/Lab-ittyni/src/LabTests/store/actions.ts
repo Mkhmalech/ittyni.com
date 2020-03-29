@@ -14,4 +14,11 @@ export enum LabTestActions {
   LAB_TESTS_FR_SEARCH = "@@labtests/LAB_TESTS_FR_SEARCH",
   LAB_TESTS_FR_SEARCH_ERROR = "@@labtests/LAB_TESTS_FR_SEARCH_ERROR",
   LAB_TESTS_FR_SEARCH_SUCCESS = "@@labtests/LAB_TESTS_FR_SEARCH_SUCCESS",
+
+  /**
+   * fetch all labtests 
+   */
+  LAB_TESTS_EN_FETCH = "@@labtests/LAB_TESTS_EN_FETCH",
+  LAB_TESTS_EN_FETCH_ERROR = "@@labtests/LAB_TESTS_EN_FETCH_ERROR",
+  LAB_TESTS_EN_FETCH_SUCCESS = "@@labtests/LAB_TESTS_EN_FETCH_SUCCESS",
 }

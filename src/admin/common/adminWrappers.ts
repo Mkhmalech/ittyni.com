@@ -106,11 +106,18 @@ export const main = styled('main')<{closed : boolean}>`
     display : flex;
 
     aside {
-        display : ${({closed}) => closed? 'none' : 'block'}
+        display : ${({closed}) => closed? 'none' : 'block'};
     }
 
     &>div {
         flex-basis : ${({closed}) => closed? (screen.width - eleModuleWidth)+'px' : '80%'} !important;
+        ${device.mobile`
+            flex-basis :${screen.width}px;        
+        `}
+
+        ${device.tablet`
+            flex-basis : ${screen.width - eleModuleWidth }px !important;        
+        `}
     }
 
     ${device.mobile`
@@ -132,13 +139,18 @@ export const main = styled('main')<{closed : boolean}>`
  */
 export const sidebar = styled('aside')`
     flex-basis : 20%;
-
+    min-width: 200px;
+    
     ${device.mobile`
         display : none;
     `}
 
     ${device.tablet`
-        display : none;
+        position: absolute;
+        min-height: 95.8%;
+        z-index: 10;
+        background: #f3f3f3;
+        min-width: 200px;
     `}
 `
 /**
@@ -169,8 +181,7 @@ export const content = styled('div').attrs({})`
     `}
 
     ${device.tablet`
-        flex-basis : ${screen.width - eleModuleWidth }px;
-        
+        flex-basis : ${screen.width - eleModuleWidth }px !important;        
     `}
 `
 
