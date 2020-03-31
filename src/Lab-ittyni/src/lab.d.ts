@@ -184,6 +184,60 @@ interface ILabo {
 /****************************************
  *********   Lab States  ************
  ****************************************/
+type LabTestID = String
+type LabTestTitle = String
+type LabTestNameEn = String
+type LabTestNameFr = String
+type LabTestDepartement = LabDepartement[]
+type LabTestPanelReferenceMnemonic = string
+type LabTestPanels = String[]
+type LabTestMoleculeFamily = String
+type LabTestReferenceCode = Number
+type LabTestReferenceCpt = Number
+type LabTestReferenceMnemonic = String
+type LabTestFinanceBCode = String
+type LabTestFinanceCountry = String
+
+
+/***************************
+ *  Laboratory Sample
+ ***************************/
+type SampleType = "Plasma" | "Serum" | "Sang Total" | "Urine"
+
+
+type SampleCollectorColor = "Rouge" | "Vert" | "Gris" | "Violet" | "Bleu" | "Noir"
+
+type SampleCollectAnticoagulant = 
+  "EDTA" | "Sec" | "Sodium et Oxalate de Potassium" | 
+  "Héparine de Lithium" | "Citrate de Sodium" ;
+
+interface SampleStability {
+
+  TempCelsius : Number,
+
+  TimeDays : Number
+
+}
+
+interface LabTestSampleCollector {
+  
+  Color : SampleCollectorColor
+
+  Anticoagulant : SampleCollectAnticoagulant
+
+
+}
+
+interface LabTestSample {
+  
+  Collect : LabTestSampleCollector
+
+  TransportTempCelsius : Number
+
+  Stability : SampleStability
+}
+
+
 /**
  * labTestState {
  *  @labtests
@@ -192,6 +246,7 @@ interface ILabo {
 interface LabTestState {
   labtests?: LabTest[];
   labtestsAll?: LabTest[];
+  labTestDetails? : LabTest
 }
 
 interface LabLaboState {}

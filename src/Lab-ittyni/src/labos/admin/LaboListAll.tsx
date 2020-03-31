@@ -13,13 +13,22 @@ export const LaboListAll = ({ LabosList }: any) => {
     const Labo = new Labos()
 
     if (LabosList.length <= 0) {
-        Labo.LaboAllList();
+        // Labo.LaboAllList();
         return <div>loading......</div>
     }
     else
         return (<div>
             <h1>List des Analyses Medicales</h1>
             <Table.Container>
+                <Table.Header>
+                    <Table.THead>
+                        <Table.HeaderRow>
+                            <th style={{ flex: 9 }}><input placeholder="nom du test" /></th>
+                            <th style={{ flex: 1 }}><input placeholder="N.U" alt="Nom Unique" /></th>
+                            <th style={{ flex: 1 }}><input placeholder="B code" /></th>
+                        </Table.HeaderRow>
+                    </Table.THead>
+                </Table.Header>
                 <Table.Content>
                     <Table.TBody>
                         {LabosList.map((item: any) =>
@@ -36,7 +45,7 @@ export const LaboListAll = ({ LabosList }: any) => {
 }
 
 const mapStateToProps = ({ labState }: IttyniState) => ({
-    LabosList: labState.test ? labState.test.LabosAll : undefined
+    LabosList: labState.labo ? labState.labo : undefined
 })
 
 export default connect(mapStateToProps)(LaboListAll)

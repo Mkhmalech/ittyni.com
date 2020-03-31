@@ -25,6 +25,12 @@ export const LabTestReducer = (state=initialState, action : AnyAction) =>{
                 ...state,
                 labtestsAll : action.payload.AllLabTests_en
             }
+        case LabTestActions.LAB_TESTS_EN_FETCH_DETAILS_SUCCESS : 
+            return {...state, labTestDetails : action.payload.LabTestView_en}
+        case LabTestActions.LAB_TEST_DETAILS_UPDATE_SUCCESS : 
+            return {...state}
+        case LabTestActions.LAB_TESTS_FILTER_BY_EN_NAME_SUCCESS : 
+            return {...state, labtestsAll : action.payload.nameEnFilter}
         default:
             return {
                 ...state

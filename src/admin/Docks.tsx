@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { labRoutes } from '../lab-ittyni/src/routes';
 
 interface IDockProps {
   username : string

@@ -13,7 +13,7 @@ import { theme } from "./theme";
 
 import { Home } from './website/index'
 import { routes } from './routes';
-import Admin from './admin'
+import Admin from './admin/Layout'
 
 
 interface MainProps {

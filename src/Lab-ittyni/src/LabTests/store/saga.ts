@@ -97,6 +97,42 @@ function* LabTestsFetchAll({path, payload} : AnyAction){
         LabTestActions.LAB_TESTS_EN_FETCH_SUCCESS
     )
 }
+
+/**
+ * fetch lab test details
+ */
+function* LabTestFetchDetails({path, payload} : AnyAction){
+    yield tryFetching(
+        path, 
+        payload,
+        LabTestActions.LAB_TESTS_EN_FETCH_DETAILS_ERROR,
+        LabTestActions.LAB_TESTS_EN_FETCH_DETAILS_SUCCESS
+    )
+}
+
+/**
+ * request test details update
+ */
+function* LabTestUpdateDetails({path, payload}: AnyAction){
+    yield tryFetching(
+        path, 
+        payload,
+        LabTestActions.LAB_TEST_DETAILS_UPDATE_ERROR,
+        LabTestActions.LAB_TEST_DETAILS_UPDATE_SUCCESS
+    )
+}
+
+/**
+ * filter by name saga
+ */
+function* LabTestFilterByEnName({path, payload}: AnyAction){
+    yield tryFetching(
+        path, 
+        payload,
+        LabTestActions.LAB_TESTS_FILTER_BY_EN_NAME_ERROR,
+        LabTestActions.LAB_TESTS_FILTER_BY_EN_NAME_SUCCESS
+    )
+}
 //watcher func dispatcher
 function* watchLabTest(){
 
@@ -104,6 +140,9 @@ function* watchLabTest(){
     yield takeEvery(LabTestActions.LAB_TESTS_FR_FETCH, LabTestFrListFetch)
     yield takeEvery(LabTestActions.LAB_TESTS_FR_SEARCH, LabTestsFrSearch)
     yield takeEvery(LabTestActions.LAB_TESTS_EN_FETCH, LabTestsFetchAll)
+    yield takeEvery(LabTestActions.LAB_TESTS_EN_FETCH_DETAILS, LabTestFetchDetails)
+    yield takeEvery(LabTestActions.LAB_TEST_DETAILS_UPDATE, LabTestUpdateDetails)
+    yield takeEvery(LabTestActions.LAB_TESTS_FILTER_BY_EN_NAME, LabTestFilterByEnName)
 }
 
 export function* LabTestSaga(){

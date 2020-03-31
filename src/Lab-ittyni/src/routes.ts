@@ -1,5 +1,7 @@
 import * as Labtest from "./labTests/index";
 import LabTestListAll from "./labTests/admin/LabTestListAll";
+import { LaboListAll } from './labos/admin/LaboListAll';
+import { LabTestEdit } from './labTests/admin/LabTestEdit';
 
 export const labRoutes  = {
     
@@ -21,13 +23,18 @@ export const labRoutes  = {
             component : ''
         },
         admin : {
-            link : '/admin/:user/lab/*',
+            link : '/admin/:username/lab/*',
             dock : '',
             sidebar : Labtest.Sidebar,
             LabtestListAll : {
-                path : '/admin/:user/lab/labtests',
+                path : '/admin/:username/lab/labtests',
                 title : 'LabTests',
                 component : LabTestListAll
+            },
+            LabTestEdit : {
+                path : '/admin/:username/lab/labtests/:test',
+                title : 'Modification de procedure',
+                component : LabTestEdit
             }
         }
     },
@@ -49,14 +56,13 @@ export const labRoutes  = {
             component : ''
         },
         admin : {
+            link : '/admin/:username/lab/*',
             dock : '',
-            sidebar : [
-                {
-                    link : '',
-                    title : '',
-                    component : ''
-                }
-            ]
+            LaboListAll : {
+                path : '/admin/:username/lab/laboslistall',
+                title : 'list de tout les laboratoire',
+                component : LaboListAll
+            }
         }
     } 
    

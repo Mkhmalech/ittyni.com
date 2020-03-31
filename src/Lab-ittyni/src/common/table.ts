@@ -45,6 +45,9 @@ export const TBody = styled.tbody`
   flex-direction: column;
   height: 650px;
   overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar{display : none}
 `;
 export const ContentRow = styled.tr`
   display: flex;

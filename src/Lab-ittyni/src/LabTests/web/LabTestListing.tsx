@@ -15,23 +15,22 @@ const LabTestsListing : React.FC<ILabTestsListingProps> =  ({labtests}) => {
 
   let data : ListData[] = [];
 
-  if(labtests){
-    labtests.length > 0 ?  (
-      labtests.map((labtest) => {
-        data.push({
-          abbr : labtest.reference ? labtest.reference.Mnemonic : '-',
-          title : labtest.name ? labtest.name.fr ? labtest.name.fr : '-'  : '-',
-          description : 'this is a description',
-          options : '',
-          bcode : labtest.finance ? (labtest.finance[0] ? labtest.finance[0].Bcode : 0) : 0,
-          price : labtest.finance ? (labtest.finance[0] ? Math.floor(labtest.finance[0].Bcode*1.34) : 0) : 0,
-          specimen : {
-            ...labtest.specimen
-          }
-        })
+  if(labtests === undefined || labtests.length <= 0){ labtestClasse.labTestsFetching() } 
+  else {
+    labtests.map((labtest) => {
+      data.push({
+        abbr : labtest.reference ? labtest.reference.Mnemonic : '-',
+        title : labtest.name ? labtest.name.fr ? labtest.name.fr : '-'  : '-',
+        description : 'this is a description',
+        options : '',
+        bcode : labtest.finance ? (labtest.finance[0] ? labtest.finance[0].Bcode : 0) : 0,
+        price : labtest.finance ? (labtest.finance[0] ? Math.floor(labtest.finance[0].Bcode*1.34) : 0) : 0,
+        specimen : {
+          ...labtest.specimen
+        }
       })
-    ) : labtestClasse.labTestsFetching()
-  } 
+    })
+  }
 
   return (
     <>
@@ -45,7 +44,7 @@ const mapStateToProps = ({labState : { test }} : IttyniState) => ({
   /**
    * List of frensh Lab procedure 
    */
-  labtests : test ? test.labtests : [],
+  labtests : test ? test.labtests : undefined,
 
   /**
    * 

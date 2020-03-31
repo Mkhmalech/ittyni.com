@@ -19,10 +19,11 @@ import { labRoutes } from '../lab-ittyni/src/routes';
 import { Sidebar } from '../lab-ittyni/src/labTests/admin/LabTest';
 import { Admin } from './controller/admin';
 
-interface IAppProps extends AuthLoginState, AdminState{
-}
 
-const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, userId, sidebar}) => {
+
+interface IAppProps extends AuthLoginState, AdminState, LabTestState {}
+
+const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, userId, sidebar, labTestDetails}) => {
 
   // create a admin instance to control layout 
   const admin = new Admin();
@@ -83,8 +84,13 @@ const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, user
                 <Wrapper.page>
 
                     <Route path={`/admin/${username}/profile`} component={()=><Profile username ={username}/>} />
-                    <Route path={labRoutes.LabTests.admin.LabtestListAll.path} component={labRoutes.LabTests.admin.LabtestListAll.component} />
-                  
+                    <Route path={labRoutes.LabTests.admin.LabTestEdit.path} 
+                            component={()=><labRoutes.LabTests.admin.LabTestEdit.component 
+                                        LabTest={labTestDetails}  userId = {userId} />
+                                      } 
+                                    />
+                    <Route path={labRoutes.LabTests.admin.LabtestListAll.path} component={labRoutes.LabTests.admin.LabtestListAll.component}  exact/>
+                    
                 </Wrapper.page>
               </Wrapper.content>
 
@@ -97,10 +103,11 @@ const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, user
   }
 };
 
-const mapStateToProps = ({Auth, admin} : IttyniState)=>({
+const mapStateToProps = ({Auth, admin, labState} : IttyniState)=>({
   isAuth : Auth.login? Auth.login.isAuth : false,
   username : Auth.login? Auth.login.username : undefined,
   userId : Auth.login? Auth.login.userId : undefined,
-  sidebar : admin.sidebar
+  sidebar : admin.sidebar,
+  labTestDetails : labState.test? labState.test.labTestDetails : undefined
 })
 export default connect(mapStateToProps)(AdminLayout);
