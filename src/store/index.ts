@@ -22,6 +22,7 @@ import { fork, all } from 'redux-saga/effects'
 import AuthSaga from '../authentification-redux-lib/src/store/saga'
 import { admin, sidebar } from '../admin/common/adminWrappers';
 import { adminReducer } from '../admin/store/reducers';
+import { LabLaboSaga } from '../lab-ittyni/src/labos/store/saga';
 
 
 export interface IttyniState {
@@ -45,7 +46,10 @@ export const createRootReducer = (history : History)=>
 export function* rootSaga(){
     yield all([
         //lab Test Sagas
-        fork(LabTestSaga), 
+        fork(LabTestSaga),
+
+        //lab labo saga
+        fork(LabLaboSaga),
 
         // web application sagas
         fork(AuthSaga),

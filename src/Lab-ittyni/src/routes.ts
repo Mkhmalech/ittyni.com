@@ -1,69 +1,71 @@
 import * as Labtest from "./labTests/index";
 import LabTestListAll from "./labTests/admin/LabTestListAll";
-import { LaboListAll } from './labos/admin/LaboListAll';
-import { LabTestEdit } from './labTests/admin/LabTestEdit';
+import LaboListAll from "./labos/admin/LaboListAll";
+import { LabTestEdit } from "./labTests/admin/LabTestEdit";
+import { LaboEdit } from "./labos/admin/LaboEdit";
 
-export const labRoutes  = {
-    
-    LabTests : {
-        LabTestsPrice : {
-            Morocco : {
-                path : '/analyses-mediales/liste-prix-tarif-analyses-medicales/maroc',
-                title : "",
-                description : "",
-                keywords : "" ,
-                component : ''
-            }
-        },
-        LabTestDetails : {
-            path : '/analyses-mediales/:test',
-            title : "",
-            description : "",
-            keywords : "" ,
-            component : ''
-        },
-        admin : {
-            link : '/admin/:username/lab/*',
-            dock : '',
-            sidebar : Labtest.Sidebar,
-            LabtestListAll : {
-                path : '/admin/:username/lab/labtests',
-                title : 'LabTests',
-                component : LabTestListAll
-            },
-            LabTestEdit : {
-                path : '/admin/:username/lab/labtests/:test',
-                title : 'Modification de procedure',
-                component : LabTestEdit
-            }
-        }
+import LabTestsListing from "./labTests/web/LabTestListing";
+import { LabTestSearch, LaboSearch } from "../index";
+import { LabTestDetail } from "./labTests/web/LabTestDetail";
+
+// labo component
+import {LabosLisiting} from './labos/web/LabosListing'
+
+export const labRoutes = {
+  LabTests: {
+    labTests: {
+      path: "/website/analyses-medicales/Listes-prix-analyses-medicales/maroc",
+      component: LabTestsListing,
+      search: LabTestSearch
     },
-    Labo : {
-        LabLabos : {
-            Morroco : {
-                path : '/laboratoire-analyses-mediales/maroc/:city',
-                title : "",
-                description : "",
-                keywords : "" ,
-                component : ''
-            }
-        },
-        LabLaboDetails : {
-            path : '/laboratoire-analyses-mediales/maroc/:city/:labo',
-            title : "",
-            description : "",
-            keywords : "" ,
-            component : ''
-        },
-        admin : {
-            link : '/admin/:username/lab/*',
-            dock : '',
-            LaboListAll : {
-                path : '/admin/:username/lab/laboslistall',
-                title : 'list de tout les laboratoire',
-                component : LaboListAll
-            }
-        }
-    } 
-   
-}
+    labTestDetail: {
+      path: "/website/analyses-medicales/:test",
+      component: LabTestDetail
+    },
+    admin: {
+      link: "/admin/:username/lab/*",
+      dock: "",
+      sidebar: Labtest.Sidebar,
+      LabtestListAll: {
+        path: "/admin/:username/lab/labtests",
+        title: "LabTests",
+        component: LabTestListAll
+      },
+      LabTestEdit: {
+        path: "/admin/:username/lab/labtests/:test",
+        title: "Modification de procedure",
+        component: LabTestEdit
+      }
+    }
+  },
+  Labo: {
+    Labos: {
+      path: "/website/laboratoires-d-analyses-mediales/",
+      title: "",
+      description: "",
+      search: LaboSearch,
+      component: LabosLisiting
+    },
+    LaboDetails: {
+      path: "/website/laboratoire-analyses-mediales/:labo",
+      title: "",
+      description: "",
+      keywords: "",
+      component: LabosLisiting
+    },
+    admin: {
+      link: "/admin/:username/lab/labo/*",
+      dock: "",
+      LaboListAll: {
+        path: "/admin/:username/lab/labos",
+        title: "list de tout les laboratoire",
+        component: LaboListAll
+      },
+      LaboEdit: {
+        path: "/admin/:username/lab/labo/:labo",
+        title: "Modifier laboratoire",
+        component: LaboEdit
+      }
+    }
+  }
+};

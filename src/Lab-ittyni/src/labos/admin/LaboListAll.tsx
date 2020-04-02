@@ -3,39 +3,41 @@ import { connect } from 'react-redux';
 import { IttyniState } from '../../../../store/index';
 import { Labos } from '../controller/Labos';
 import * as Table from '../../common/table'
+import { Link, useRouteMatch } from 'react-router-dom';
 
-interface Props {
-    LabosList: []
-}
+interface Props extends LabLaboState{}
+
 // list , filter and link to test details
-export const LaboListAll = ({ LabosList }: any) => {
+export const LaboListAll = ({ listAll }: any) => {
 
     const Labo = new Labos()
 
-    if (LabosList.length <= 0) {
-        // Labo.LaboAllList();
+    const { params: { username } }: any = useRouteMatch()
+
+    if (listAll === undefined) {
+        Labo.LaboListAll();
         return <div>loading......</div>
     }
     else
         return (<div>
-            <h1>List des Analyses Medicales</h1>
+            <h1>List des Laboratoire Medicales</h1>
             <Table.Container>
                 <Table.Header>
                     <Table.THead>
                         <Table.HeaderRow>
-                            <th style={{ flex: 9 }}><input placeholder="nom du test" /></th>
-                            <th style={{ flex: 1 }}><input placeholder="N.U" alt="Nom Unique" /></th>
-                            <th style={{ flex: 1 }}><input placeholder="B code" /></th>
+                            <th style={{ flex: 2 }}><input placeholder="nom du labo" /></th>
+                            <th style={{ flex: 2 }}><input placeholder="tele" alt="tele" /></th>
+                            <th style={{ flex: 6 }}><input placeholder="address" /></th>
                         </Table.HeaderRow>
                     </Table.THead>
                 </Table.Header>
                 <Table.Content>
                     <Table.TBody>
-                        {LabosList.map((item: any) =>
-                            <Table.ContentRow key={item.name.en}>
-                                <td style={{ flex: 9 }}>{item.name.en}</td>
-                                <td style={{ flex: 1 }}>{item.reference.Mnemonic}</td>
-                                <td style={{ flex: 1 }}>{item.finance[0] ? item.finance[0].Bcode : ''}</td>
+                        {listAll.map((item: any) =>
+                            <Table.ContentRow key={item.account.name}>
+                                <td style={{ flex: 2 }}><Link to={`/admin/${username}/lab/labo/${item.account.name}`} >{item.account.name}</Link></td>
+                                <td style={{ flex: 2 }}>{item.contact.tele.fix[0]}</td>
+                                <td style={{ flex: 6 }}>{item.contact.address.street}</td>
                             </Table.ContentRow>
                         )}
                     </Table.TBody>
@@ -45,7 +47,7 @@ export const LaboListAll = ({ LabosList }: any) => {
 }
 
 const mapStateToProps = ({ labState }: IttyniState) => ({
-    LabosList: labState.labo ? labState.labo : undefined
+    listAll: labState.labo ? labState.labo.listAll : undefined
 })
 
 export default connect(mapStateToProps)(LaboListAll)

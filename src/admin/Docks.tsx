@@ -105,6 +105,7 @@ const Dock: React.FunctionComponent<IDockProps> = ({username, closeOpenSide}) =>
         border: 'none',
         textAlign: "center"
       }}>
+      <Link to={`/admin/${username}/lab/labos`}>
       <svg width={30} height={30} viewBox="0 0 64 64" fill="black" xmlns="http://www.w3.org/2000/svg">
         <path d="m62 57h-1v-45c0-.553-.447-1-1-1h-11v-9c0-.553-.447-1-1-1h-32c-.553 0-1 .447-1 1v9h-11c-.553 0-1 .447-1 1v45h-1c-.553 0-1 .447-1 1v4c0 .553.447 1 1 1h60c.553 0 1-.447 1-1v-4c0-.553-.447-1-1-1zm-9 0v-2h6v2zm6-24h-12v-10h12zm-14 0h-12v-10h12zm-14 0h-12v-10h12zm-14 0h-12v-10h12zm42 2v18h-6v-1c0-3.859-3.141-7-7-7s-7 3.141-7 7v1h-14v-1c0-3.859-3.141-7-7-7s-7 3.141-7 7v1h-6v-18zm-46 17c0-2.757 2.243-5 5-5s5 2.243 5 5v5h-10zm12 3h14v2h-14zm16-3c0-2.757 2.243-5 5-5s5 2.243 5 5v5h-10zm-24-49h30v14h-30zm-2 10v5c0 .553.447 1 1 1h32c.553 0 1-.447 1-1v-5h10v8h-54v-8zm-10 42h6v2h-6zm56 6h-58v-2h58z" />
         <path d="m21 5h-2v9c0 .553.447 1 1 1h5v-2h-4z" />
@@ -113,6 +114,7 @@ const Dock: React.FunctionComponent<IDockProps> = ({username, closeOpenSide}) =>
         <path d="m12 43h12c.553 0 1-.447 1-1v-4c0-.553-.447-1-1-1h-12c-.553 0-1 .447-1 1v4c0 .553.447 1 1 1zm1-4h10v2h-10z" />
         <path d="m40 43h12c.553 0 1-.447 1-1v-4c0-.553-.447-1-1-1h-12c-.553 0-1 .447-1 1v4c0 .553.447 1 1 1zm1-4h10v2h-10z" />
       </svg>
+      </Link>
     </button>
 
   </>

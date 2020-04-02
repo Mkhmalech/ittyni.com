@@ -171,14 +171,18 @@ interface LabLaboAffiliate {}
 
 interface LabLaboStaff {}
 
-interface ILabo {
-  account: LabLaboAccount;
-  contact: LabLaboContact;
-  staff: LabLaboStaff;
-  catalog: LabLaboCatalog;
-  order: LabLaboOrder;
-  referral: LabLaboReferral;
-  affiliate: LabLaboAffiliate;
+interface LaboWeb {
+  account?    : LabLaboAccount;
+  contact?    : LabLaboContact;
+}
+interface Labo {
+  account?    : LabLaboAccount;
+  contact?    : LabLaboContact;
+  staff?      : LabLaboStaff;
+  catalog?    : LabLaboCatalog;
+  order?      : LabLaboOrder;
+  referral?   : LabLaboReferral;
+  affiliate?  : LabLaboAffiliate;
 }
 
 /****************************************
@@ -249,7 +253,10 @@ interface LabTestState {
   labTestDetails? : LabTest
 }
 
-interface LabLaboState {}
+interface LabLaboState {
+  listAll? : [Labo] 
+  laboDetails? : Labo
+}
 
 interface LabEquipementState {}
 

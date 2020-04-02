@@ -4,14 +4,21 @@ import { GlobalStyle } from '../theme';
 import Header from './header'
 import { Link, Route, Redirect } from 'react-router-dom';
 import styled from '../theme/styled-components';
+import {HomeLink, LoginLink, LoginLinkIcon, LoginLinkText} from '../ui-ittyni/src/links/Links'
 
 
 import { routes } from '../routes';
+import { connect } from 'react-redux';
+import { IttyniState } from '../store/index';
 
-interface IHomeProps {
-}
+interface IHomeProps extends 
+/** laboState */
+LabLaboState,
+/** LabTest State */
+LabTestState 
+{}
 
-export const Home: React.FunctionComponent<IHomeProps> = (props) => {
+export const Home: React.FunctionComponent<IHomeProps> = ({listAll}) => {
   return (
     <>
       <GlobalStyle />
@@ -34,12 +41,17 @@ export const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <Wrapper.Main>
 
           <Wrapper.MainContent>
-
+            {/** login page */}
             <Route path={routes.auth.path} component={routes.auth.component} exact/>
 
-            <Route path={routes.website.labTests.path} component={routes.website.labTests.component} />
+            {/** lab procedure list page */}
+            <Route path={routes.lab.LabTests.labTests.path} component={routes.lab.LabTests.labTests.component} />
 
-            <Route path={routes.website.labTestDetail.path} component={routes.website.labTestDetail.component} exact/>
+            {/** lab procedures details */}
+            <Route path={routes.lab.LabTests.labTestDetail.path} component={routes.lab.LabTests.labTestDetail.component} exact/>
+
+            {/** lab labos page */}
+            <Route path={routes.lab.Labo.Labos.path} component={()=><routes.lab.Labo.Labos.component labos={listAll} />} />
 
           </Wrapper.MainContent>
           <Wrapper.MainSide>
@@ -56,28 +68,10 @@ export const Home: React.FunctionComponent<IHomeProps> = (props) => {
   );
 };
 
-const HomeLink = styled(Link)`
-  text-align: right;
-  flex: 1 0;
-  padding: 5px 0 0 0;
-  text-decoration: none;
-`
-
-const LoginLink = styled(Link)`
-  flex: 1 0;
-  display: flex;
-  padding: 1px 0 0 20px;
-  text-decoration: none;
-`
-
-const LoginLinkText = styled('div')`
-  padding: 5px 0 0 5px;
-`
-const LoginLinkIcon = styled('div')`
-  border-left: 1px solid;
-  padding-left : 10px;
-  margin-bottom: 20px;
-`
+const mapStateToProps = ({labState : { labo }} : IttyniState) =>({
+  listAll : labo? labo.listAll : undefined
+})
+export default connect(mapStateToProps)(Home);
 
 const LoginIcon = styled((props: { className?: string }) => (
   <svg
