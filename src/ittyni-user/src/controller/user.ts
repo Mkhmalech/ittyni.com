@@ -1,9 +1,8 @@
 import { store } from '../../../index';
 import { Dispatch } from 'redux';
+import { UserActions } from '../store/actions';
 
 export class User {
-
-    private dispatch : Dispatch = store.dispatch;
 
     constructor(){}
 
@@ -15,4 +14,15 @@ export class User {
     getUsername = ()=>{
         
     }
+
+    /**
+     * dispatch user list
+     */
+    getAllUsers = () => store.dispatch({
+        type : UserActions.USER_LIST_ALL,
+        path : 'users',
+        payload : {
+            query : `mutation{users{listAllWithRole{id email role{name}}}}`
+        }
+    })
 }

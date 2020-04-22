@@ -10,6 +10,7 @@ import {HomeLink, LoginLink, LoginLinkIcon, LoginLinkText} from '../ui-ittyni/sr
 import { routes } from '../routes';
 import { connect } from 'react-redux';
 import { IttyniState } from '../store/index';
+import Helmet from 'react-helmet';
 
 interface IHomeProps extends 
 /** laboState */
@@ -18,7 +19,10 @@ LabLaboState,
 LabTestState 
 {}
 
-export const Home: React.FunctionComponent<IHomeProps> = ({listAll}) => {
+export const Home: React.FunctionComponent<IHomeProps> = ({listAll, labTestFrDetails, laboDetails}) => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <GlobalStyle />
@@ -27,13 +31,19 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll}) => {
         <Wrapper.Header >
           <Header>
 
-            <HomeLink to="/website"> Home </HomeLink>
+            <HomeLink to="/website/analyses-medicales/Listes-prix-analyses-medicales/maroc"> Tests Medicale </HomeLink>
 
+            <LoginLink to={`/website/laboratoires-d-analyses-mediales/`}>
+              <LoginLinkIcon>
+                {/* <LoginIcon /> */}
+              </LoginLinkIcon>
+              <LoginLinkText>Laboratoires</LoginLinkText>
+            </LoginLink>
             <LoginLink to={`/website/auth/login`}>
               <LoginLinkIcon>
                 {/* <LoginIcon /> */}
               </LoginLinkIcon>
-              <LoginLinkText>Login</LoginLinkText>
+              <LoginLinkText>Connecter</LoginLinkText>
             </LoginLink>
 
           </Header>
@@ -47,11 +57,18 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll}) => {
             {/** lab procedure list page */}
             <Route path={routes.lab.LabTests.labTests.path} component={routes.lab.LabTests.labTests.component} />
 
-            {/** lab procedures details */}
-            <Route path={routes.lab.LabTests.labTestDetail.path} component={routes.lab.LabTests.labTestDetail.component} exact/>
+            {/** lab procedure details */}
+            <Route path={routes.lab.LabTests.labTestDetail.path} 
+                  component={()=><routes.lab.LabTests.labTestDetail.component labTestFrDetails={labTestFrDetails}/>} exact/>
 
             {/** lab labos page */}
-            <Route path={routes.lab.Labo.Labos.path} component={()=><routes.lab.Labo.Labos.component labos={listAll} />} />
+            <Route path={routes.lab.Labo.Labos.path} component={()=><routes.lab.Labo.Labos.component labos={listAll} />} exact/>
+
+            {/** Lab labos details */}
+            <Route path={routes.lab.Labo.LaboDetails.path} 
+                  component={()=><routes.lab.Labo.LaboDetails.component laboDetails={laboDetails} />} />
+
+            <Redirect to={`/website/analyses-medicales/Listes-prix-analyses-medicales/maroc`} />
 
           </Wrapper.MainContent>
           <Wrapper.MainSide>
@@ -68,8 +85,10 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll}) => {
   );
 };
 
-const mapStateToProps = ({labState : { labo }} : IttyniState) =>({
-  listAll : labo? labo.listAll : undefined
+const mapStateToProps = ({labState : { labo, test }} : IttyniState) =>({
+  listAll : labo? labo.listAll : undefined,
+  labTestFrDetails : test? test.labTestFrDetails : undefined,
+  laboDetails : labo? labo.laboDetails : undefined
 })
 export default connect(mapStateToProps)(Home);
 

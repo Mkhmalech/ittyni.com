@@ -31,7 +31,7 @@ const Main: React.FC<MainProps> = ({ store, history }) => {
                         <Switch>
                             <Route path={routes.admin.path} component={Admin} />
                             <Route path={routes.website.path} component={HomeLayout} />
-                            <Redirect to={routes.website.path} />
+                            <Redirect from='/*' to={routes.website.path} />
                         </Switch>
                     </Router>
                 </Provider>

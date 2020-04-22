@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { store } from '..';
 import styled from '../theme/styled-components';
 import { device } from '../theme';
 import { routes } from '../routes';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 
 
@@ -15,7 +14,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isAuthPage, children }) => {
   return (
     <>
-      <Logo className="ittyniLogo">i<span style={{ color: 'red' }}>TT</span>yni</Logo>
+      <Logo className="ittyniLogo"><Link to="/">i<span style={{ color: 'red' }}>TT</span>yni</Link></Logo>
       <SearchBox >
         <Route path={routes.lab.LabTests.labTests.path} component={routes.lab.LabTests.labTests.search} />
         <Route path={routes.lab.Labo.Labos.path} component={routes.lab.Labo.Labos.search} />

@@ -10,16 +10,17 @@ import { LabTestDetail } from "./labTests/web/LabTestDetail";
 
 // labo component
 import {LabosLisiting} from './labos/web/LabosListing'
+import {LaboDetails} from './labos/web/LaboDetails'
 
 export const labRoutes = {
   LabTests: {
     labTests: {
-      path: "/website/analyses-medicales/Listes-prix-analyses-medicales/maroc",
+      path: "/website/:category/Listes-prix-analyses-medicales/maroc",
       component: LabTestsListing,
       search: LabTestSearch
     },
     labTestDetail: {
-      path: "/website/analyses-medicales/:test",
+      path: "/website/:category/:test",
       component: LabTestDetail
     },
     admin: {
@@ -47,11 +48,11 @@ export const labRoutes = {
       component: LabosLisiting
     },
     LaboDetails: {
-      path: "/website/laboratoire-analyses-mediales/:labo",
+      path: "/website/:category/:labo",
       title: "",
       description: "",
       keywords: "",
-      component: LabosLisiting
+      component: LaboDetails
     },
     admin: {
       link: "/admin/:username/lab/labo/*",

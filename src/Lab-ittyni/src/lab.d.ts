@@ -250,7 +250,8 @@ interface LabTestSample {
 interface LabTestState {
   labtests?: LabTest[];
   labtestsAll?: LabTest[];
-  labTestDetails? : LabTest
+  labTestFrDetails? : LabTest
+  labTestEnDetails? : LabTest
 }
 
 interface LabLaboState {

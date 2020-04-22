@@ -4,6 +4,7 @@ import { Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
 import { Labtests } from '../controller/labtests';
 import { IttyniState } from '../../../../store/index';
+import Helmet from 'react-helmet';
 
 export interface ILabTestsListingProps extends LabTestState{
   dispatch : Dispatch<Action>
@@ -34,6 +35,11 @@ const LabTestsListing : React.FC<ILabTestsListingProps> =  ({labtests}) => {
 
   return (
     <>
+      <Helmet>
+        <title>prix des analyse aux maroc</title>
+        <meta name="description" content="prix des analyses medicales aux maroc list " />
+        <meta name="keywords" content="" />
+      </Helmet>
       <ListComponent listTitle="prix des analyse aux maroc" data={data} />
     </>
   );

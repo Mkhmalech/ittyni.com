@@ -21,4 +21,8 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0; 
     background : ${({theme})=>theme.color.primaryColor};
   }
+
+  h2,h3 {
+    font-size : .9em;
+  }
 `

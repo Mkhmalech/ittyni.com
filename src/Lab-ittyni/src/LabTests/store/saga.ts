@@ -101,12 +101,24 @@ function* LabTestsFetchAll({path, payload} : AnyAction){
 /**
  * fetch lab test details
  */
-function* LabTestFetchDetails({path, payload} : AnyAction){
+function* LabTestEnFetchDetails({path, payload} : AnyAction){
     yield tryFetching(
         path, 
         payload,
         LabTestActions.LAB_TESTS_EN_FETCH_DETAILS_ERROR,
         LabTestActions.LAB_TESTS_EN_FETCH_DETAILS_SUCCESS
+    )
+}
+
+/**
+ * fetch lab test details
+ */
+function* LabTestFrFetchDetails({path, payload} : AnyAction){
+    yield tryFetching(
+        path, 
+        payload,
+        LabTestActions.LAB_TESTS_FR_FETCH_DETAILS,
+        LabTestActions.LAB_TESTS_FR_FETCH_DETAILS_SUCCESS
     )
 }
 
@@ -140,7 +152,8 @@ function* watchLabTest(){
     yield takeEvery(LabTestActions.LAB_TESTS_FR_FETCH, LabTestFrListFetch)
     yield takeEvery(LabTestActions.LAB_TESTS_FR_SEARCH, LabTestsFrSearch)
     yield takeEvery(LabTestActions.LAB_TESTS_EN_FETCH, LabTestsFetchAll)
-    yield takeEvery(LabTestActions.LAB_TESTS_EN_FETCH_DETAILS, LabTestFetchDetails)
+    yield takeEvery(LabTestActions.LAB_TESTS_EN_FETCH_DETAILS, LabTestEnFetchDetails)
+    yield takeEvery(LabTestActions.LAB_TESTS_FR_FETCH_DETAILS, LabTestFrFetchDetails)
     yield takeEvery(LabTestActions.LAB_TEST_DETAILS_UPDATE, LabTestUpdateDetails)
     yield takeEvery(LabTestActions.LAB_TESTS_FILTER_BY_EN_NAME, LabTestFilterByEnName)
 }

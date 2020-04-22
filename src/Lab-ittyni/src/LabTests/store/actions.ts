@@ -23,11 +23,18 @@ export enum LabTestActions {
   LAB_TESTS_EN_FETCH_SUCCESS = "@@labtests/LAB_TESTS_EN_FETCH_SUCCESS",
 
   /**
-   * fetch Test details 
+   * fetch Test details En
    */
   LAB_TESTS_EN_FETCH_DETAILS = "@@labtests/LAB_TESTS_EN_FETCH_DETAILS",
   LAB_TESTS_EN_FETCH_DETAILS_ERROR = "@@labtests/LAB_TESTS_EN_FETCH_DETAILS_ERROR",
   LAB_TESTS_EN_FETCH_DETAILS_SUCCESS = "@@labtests/LAB_TESTS_EN_FETCH_DETAILS_SUCCESS",
+
+  /**
+   * fetch Test details Fr
+   */
+  LAB_TESTS_FR_FETCH_DETAILS = "@@labtests/LAB_TESTS_FR_FETCH_DETAILS",
+  LAB_TESTS_FR_FETCH_DETAILS_ERROR = "@@labtests/LAB_TESTS_FR_FETCH_DETAILS_ERROR",
+  LAB_TESTS_FR_FETCH_DETAILS_SUCCESS = "@@labtests/LAB_TESTS_FR_FETCH_DETAILS_SUCCESS",
 
   /**
    * update test details

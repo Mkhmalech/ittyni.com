@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Labos } from '../controller/Labos';
 import * as List from '../../../../ui-ittyni/src/list/list'
+import { Link } from 'react-router-dom';
+import { TestLink } from '../../../../ui-ittyni/src/links/Links';
+import Helmet from 'react-helmet';
 
 interface ILaboLisitingProps {
   labos?: [LaboWeb]
@@ -11,13 +14,13 @@ const labo = new Labos();
 
 export const LabosLisiting: React.FunctionComponent<ILaboLisitingProps> = ({ labos }) => {
 
-  React.useEffect(() => {
-    // Update the document title using the browser API
-    window.scroll(0, 0)
-  });
-
   if (labos) return (
+    <>
+    <Helmet>
+      <title>Listes des laboratoires medicales au maroc</title>
+    </Helmet>
     <List.Container>
+      <h1>Listes des laboratoires medicales au maroc</h1>
       {
         labos.map((labo: LaboWeb) =>
           <List.Item key={labo.account ? labo.account.name : '-'}>
@@ -27,26 +30,32 @@ export const LabosLisiting: React.FunctionComponent<ILaboLisitingProps> = ({ lab
             <List.ItemContent>
 
               <List.ItemContentTitle>
-                {labo.account ? labo.account.name : '-'}
+                <h2>
+                <TestLink to={`/website/laboratoire-d-analyses-medicales/${labo.account ? labo.account.name : '-'}`}>
+                  {labo.account ? labo.account.name : '-'}
+                </TestLink>
+                </h2>
               </List.ItemContentTitle>
 
               <List.ItemContentDescription>
-                {labo.contact ? labo.contact.address.street : '-'}
+                <h3>
+                {labo.contact ? labo.contact.address.street : '-'} , <span>Fes</span>
+                </h3>
               </List.ItemContentDescription>
 
             </List.ItemContent>
 
             <List.ItemOptions>
               <List.ItemOptionsData>
+                <h3>
                 {labo.contact ? labo.contact.tele.fix[0] : '-'}
-              </List.ItemOptionsData>
-              <List.ItemOptionsData>
-                {'Fes'}
+                </h3>
               </List.ItemOptionsData>
             </List.ItemOptions>
           </List.Item>
         )}
     </List.Container>
+    </>
   )
   return (labo.LaboListAll() &&
     <div>loading.....</div>

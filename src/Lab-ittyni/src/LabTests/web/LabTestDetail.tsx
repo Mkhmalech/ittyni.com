@@ -1,59 +1,87 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Article, Badge } from '../../../../ui-ittyni/src'
+import { Labtests } from '../controller/labtests';
+import { Ico } from '../../../../react-icons-sc/src/ico';
+import {atom} from '../../icon/atom'
 
-export const LabTestDetail = () => {
+const labtest = new Labtests();
 
-    const { category, test } = useParams()
+export const LabTestDetail = ({labTestFrDetails} : any) => {
 
+    const { category, test } = useParams();
+    
+    if (category === 'analyses-medicales' && test !== undefined) {
+        if (labTestFrDetails === undefined || labTestFrDetails === null || labTestFrDetails.name.fr !== test) {
+            labtest.labTestFrFetchDetails(test)
+            return <div>Loading....</div>
+        } else {
+            const {
+                name : {fr},
+                finance,
+                reference : {Mnemonic},
+                specimen : {nature, tubeColor, anticoagulant, numberoftube,  volumemin}
+            } = labTestFrDetails
+            return (
+                <Article.Container>
+                    <Article.Header>
+                        <Article.HeaderContainer>
+                            <Article.HeaderAvatar>
+                                <Article.HeaderAvatarIcon>
+                                    <Ico
+                                        {...atom}
+                                        width="140"
+                                        height="140"
+                                    />
+                                </Article.HeaderAvatarIcon>
+                            </Article.HeaderAvatar>
+                            <Article.HeaderAbstract>
+                                <Article.HeaderTitle>{labTestFrDetails.name.fr}</Article.HeaderTitle>
+                                <Article.HeaderSubTitle>{category ? category.split('-').join(' ') : ''}</Article.HeaderSubTitle>
+                                <Article.HeaderMiddle>
+                                    { nature ? nature.map((nature : any) =>(
+                                        <span key={nature}>
+                                            <span>{nature}</span>
+                                            <span> &nbsp;•&nbsp; </span>
+                                        </span>
+                                    ))                                    
+                                    : 
+                                    ''}
+                                </Article.HeaderMiddle>
+                                <Article.HeaderFoot>
+                                    <Article.HeaderFootAssurance>
+                                        {finance[0] ? <>
+                                            <p><Badge>
+                                                Prix Total : {Math.floor(finance[0].Bcode * 1.34)} dhs
+                                            </Badge></p>
+                                            <p>
+                                                <Badge bgcolor="#388e3c">
+                                                    CNSS : {Math.floor((finance[0].Bcode * 1.1) * 0.7)} dhs
+                                                </Badge>
+                                                <Badge bgcolor="#d32f2f">
+                                                    Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.7))} dhs
+                                                </Badge>
+                                            </p>
+                                            <p><Badge bgcolor="#388e3c">
+                                                CNOPS : {Math.floor((finance[0].Bcode * 1.1) * 0.8)} dhs
+                                                </Badge><Badge bgcolor="#d32f2f">
+                                                Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.8))} dhs
+                                                </Badge>
+                                            </p>
+                                        </>: ''}
+                                    </Article.HeaderFootAssurance>
+                                </Article.HeaderFoot>
+                            </Article.HeaderAbstract>
+                        </Article.HeaderContainer>
+                    </Article.Header>
 
-    return (
-        <Article.Container>
-            <Article.Header>
-                <Article.HeaderContainer>
-                    <Article.HeaderAvatar>
-                        <Article.HeaderAvatarIcon>
-                            <img
-                                src="https://static.codepen.io/assets/packs/greensock-logo-9db91ff4c4a50faa1690d4f3d7ffca6e.png"
-                                width="140"
-                                height="140"
-                            />
-                        </Article.HeaderAvatarIcon>
-                    </Article.HeaderAvatar>
-                    <Article.HeaderAbstract>
-                        <Article.HeaderTitle>{test}</Article.HeaderTitle>
-                        <Article.HeaderSubTitle>{category ? category.replace('-', ' ') : ''}</Article.HeaderSubTitle>
-                        <Article.HeaderMiddle>
-                            <span>Serum</span>
-                            <span> &nbsp;•&nbsp; </span>
-                            <span>Plasma</span>
-                            <span> &nbsp;•&nbsp; </span>
-                            <span>Urine</span>
-                            <span> &nbsp;•&nbsp; </span>
-                            <span>dernier mise a jour 13/03/2020</span>
-                        </Article.HeaderMiddle>
-                        <Article.HeaderFoot>
-                            <Article.HeaderFootAssurance> 
-                                <p><Badge>Prix Total : 88 dhs</Badge></p>
-                                <p>
-                                    <Badge bgcolor="#388e3c">CNSS : {Math.floor(88*0.7)} dhs</Badge>  
-                                    <Badge bgcolor="#d32f2f">Adherent : {Math.floor(88*0.3)} dhs</Badge>
-                                </p>
-                                <p>
-                                    <Badge bgcolor="#388e3c">CNOPS : {Math.floor(88*0.8)} dhs</Badge>
-                                    <Badge bgcolor="#d32f2f">Adherent : {Math.floor(88*0.2)} dhs</Badge>
-                                </p>
-                                
-                            </Article.HeaderFootAssurance>
-                        </Article.HeaderFoot>
-                    </Article.HeaderAbstract>
-                </Article.HeaderContainer>
-            </Article.Header>
+                </Article.Container>
+            )
 
-            {ArticleComponent(details)}
-
-        </Article.Container>
-    )
+        }
+    } else {
+        return (<></>)
+    }
 }
 
 interface ArticleDetailH1 {
@@ -64,10 +92,10 @@ interface ArticleDetailH2 {
     h2: string
     p: string
 }
-const details : ArticleDetailH1[] = [
+const details: ArticleDetailH1[] = [
     {
         h1: 'Presentation',
-        detail : 'en Cours...'
+        detail: 'en Cours...'
     },
     {
         h1: 'Pre-analytique',
@@ -91,17 +119,17 @@ const details : ArticleDetailH1[] = [
         ]
     },
     {
-        h1 : 'Analytiques',
-        detail : [
+        h1: 'Analytiques',
+        detail: [
             {
-                h2 : 'Methodlogie',
-                p : 'en cours...'
-            },{
-                h2 : 'Automates',
-                p : 'en cours...'
-            },{
-                h2 : 'Materielles',
-                p : 'en cours...'
+                h2: 'Methodlogie',
+                p: 'en cours...'
+            }, {
+                h2: 'Automates',
+                p: 'en cours...'
+            }, {
+                h2: 'Materielles',
+                p: 'en cours...'
             }
         ]
     }
@@ -115,7 +143,7 @@ const ArticleComponent = (
         <Article.Paragraphe key={article.h1}>
             <Article.ParagraphTitle>{article.h1}</Article.ParagraphTitle>
             {
-                
+
                 typeof article.detail === 'string' ?
                     <Article.ParagraphText>
                         {article.detail}

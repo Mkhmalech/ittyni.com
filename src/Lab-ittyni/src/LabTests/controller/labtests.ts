@@ -63,12 +63,27 @@ export class Labtests {
       },
       path: "tests"
     });
-
-  labTestFetchDetails = (name: LabTestNameEn) =>
+  /**
+   * get all details of labtest
+   * @param name_of_the_test_en
+   */
+  labTestEnFetchDetails = (name: LabTestNameEn) =>
     store.dispatch({
       type: LabTestActions.LAB_TESTS_EN_FETCH_DETAILS,
       payload: {
-        query: `query{LabTestView_en(name:{en:"${name}"}){id name{en fr}reference{Mnemonic CPT code}finance{Bcode}specimen{nature tubeColor anticoagulant numberoftube volumemin}}}`
+        query: `query{LabTestView_en(name:{en : "${name}"}){id name{en fr}reference{CPT code Mnemonic}finance{Bcode}specimen{nature tubeColor anticoagulant numberoftube volumemin}}}`
+      },
+      path: "tests"
+    });
+  /**
+   * get all details of labtest
+   * @param name_of_the_test_fr
+   */
+  labTestFrFetchDetails = (name: LabTestNameEn) =>
+    store.dispatch({
+      type: LabTestActions.LAB_TESTS_FR_FETCH_DETAILS,
+      payload: {
+        query: `query{LabTestView_fr(name:"${name}"){id name{fr}reference{Mnemonic}finance{Bcode}specimen{nature tubeColor anticoagulant numberoftube volumemin}}}`
       },
       path: "tests"
     });

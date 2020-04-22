@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '../../../../theme/styled-components'
-import { useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, useParams } from 'react-router-dom';
 import { Labtests } from '../controller/labtests'
 
 const labtest = new Labtests()
@@ -8,10 +8,10 @@ const labtest = new Labtests()
 
 export const LabTestEdit = ({LabTest, userId} : any) => {
 
-    const {params : {username, test}} : any = useRouteMatch();
+    const  {username, test} : any = useParams();
 
-    if(LabTest === undefined || LabTest.name.en !== test) {        
-        labtest.labTestFetchDetails(test);
+    if(LabTest === undefined || LabTest === null || LabTest.name.en !== test) {        
+        labtest.labTestEnFetchDetails(test);
         return <span>Loadin .....</span>
     } else {
         labtest.setLabTestNameEn(LabTest.name.en);

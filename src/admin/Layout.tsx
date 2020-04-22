@@ -12,12 +12,13 @@ import * as Wrapper from './common/adminWrappers';
 import { Globals } from './common/adminWrappers';
 import Dock from './Docks';
 import { Profile } from '../ittyni-user/src/admin/profile';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { IttyniState } from '../store/index';
 import * as  User  from '../ittyni-user/src/admin/User';
 import { labRoutes } from '../lab-ittyni/src/routes';
 import { Sidebar } from '../lab-ittyni/src/labTests/admin/LabTest';
 import { Admin } from './controller/admin';
+import { userRoutes } from '../ittyni-user/src/userRoutes';
 
 
 
@@ -25,13 +26,21 @@ interface IAppProps extends
     AuthLoginState, 
     AdminState, 
     LabTestState,
-    LabLaboState {}
+    LabLaboState
+    {}
 
-const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, userId, sidebar, labTestDetails, laboDetails}) => {
+const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, userId, sidebar, labTestEnDetails, laboDetails}) => {
 
   // create a admin instance to control layout 
   const admin = new Admin();
+
+  React.useEffect(()=>{
+    
+  })
+  // get users from state
+  
   // if user is not logged in or user data is not available 
+
   // return to authentification component
   if (userId === undefined || !localStorage.getItem('TTUID')  ) {
     return <Redirect to="/website/auth/login" />
@@ -90,13 +99,21 @@ const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, user
                     <Route path={`/admin/${username}/profile`} component={()=><Profile username ={username}/>} />
                     <Route path={labRoutes.LabTests.admin.LabTestEdit.path} 
                             component={()=><labRoutes.LabTests.admin.LabTestEdit.component 
-                                        LabTest={labTestDetails}  userId = {userId} />
+                                        LabTest={labTestEnDetails}  userId = {userId} />
                                       } 
                                     />
                     <Route path={labRoutes.LabTests.admin.LabtestListAll.path} component={labRoutes.LabTests.admin.LabtestListAll.component}  exact/>
-                    <Route path={labRoutes.Labo.admin.LaboListAll.path} component={labRoutes.Labo.admin.LaboListAll.component} />
+                    <Route path={labRoutes.Labo.admin.LaboListAll.path} 
+                           component={labRoutes.Labo.admin.LaboListAll.component} 
+                    />
                     <Route path={labRoutes.Labo.admin.LaboEdit.path} 
-                           component={()=><labRoutes.Labo.admin.LaboEdit.component laboDetails={laboDetails} userId = {userId} />} />
+                           component={()=><labRoutes.Labo.admin.LaboEdit.component laboDetails={laboDetails} userId = {userId} />} 
+                    />
+
+                    {/* users component */}
+                    <Route path={userRoutes.admin.usersListAll.path} 
+                      component={userRoutes.admin.usersListAll.component}
+                    />
                     
                 </Wrapper.page>
               </Wrapper.content>
@@ -110,12 +127,12 @@ const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, user
   }
 };
 
-const mapStateToProps = ({Auth, admin, labState} : IttyniState)=>({
+const mapStateToProps = ({Auth, admin, labState, users} : IttyniState)=>({
   isAuth : Auth.login? Auth.login.isAuth : false,
   username : Auth.login? Auth.login.username : undefined,
   userId : Auth.login? Auth.login.userId : undefined,
   sidebar : admin.sidebar,
-  labTestDetails : labState.test? labState.test.labTestDetails : undefined,
+  labTestEnDetails : labState.test? labState.test.labTestEnDetails : undefined,
   laboDetails : labState.labo? labState.labo.laboDetails : undefined
 })
 export default connect(mapStateToProps)(AdminLayout);
