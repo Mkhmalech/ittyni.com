@@ -51,6 +51,7 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll, labTestFrDet
         <Wrapper.Main>
 
           <Wrapper.MainContent>
+
             {/** login page */}
             <Route path={routes.auth.path} component={routes.auth.component} exact/>
 
@@ -67,8 +68,11 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll, labTestFrDet
             {/** Lab labos details */}
             <Route path={routes.lab.Labo.LaboDetails.path} 
                   component={()=><routes.lab.Labo.LaboDetails.component laboDetails={laboDetails} />} />
-
-            <Redirect to={`/website/analyses-medicales/Listes-prix-analyses-medicales/maroc`} />
+            {/* any rout in website */}
+            <Route path="/website/" render={({history})=>{
+              history.push(`/analyses-medicales/Listes-prix-analyses-medicales/maroc`)
+              return(<></>)
+            } } exact/>
 
           </Wrapper.MainContent>
           <Wrapper.MainSide>

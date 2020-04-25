@@ -1,14 +1,15 @@
 import { listAllUsers } from './admin/listAllUsers';
+import { UserDetails } from './admin/userDetails';
 
 export const userRoutes = {
     admin : {
         usersListAll : {
-            path : `/admin/:user/users/list-all`,
+            path : `/admin/:username/users/list-all`,
             component: listAllUsers
         },
         userDetails : {
-            path : '',
-            component : '/admin/:user/users/:userId/details'
+            path : '/admin/:username/users/details/:userId',
+            component : UserDetails
         }
     },
     web : {}

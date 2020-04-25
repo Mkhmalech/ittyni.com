@@ -3,79 +3,87 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Article, Badge } from '../../../../ui-ittyni/src'
 import { Labtests } from '../controller/labtests';
 import { Ico } from '../../../../react-icons-sc/src/ico';
-import {atom} from '../../icon/atom'
+import { atom } from '../../icon/atom'
+import { Helmet } from 'react-helmet';
 
 const labtest = new Labtests();
 
-export const LabTestDetail = ({labTestFrDetails} : any) => {
+export const LabTestDetail = ({ labTestFrDetails }: any) => {
 
     const { category, test } = useParams();
-    
+
     if (category === 'analyses-medicales' && test !== undefined) {
         if (labTestFrDetails === undefined || labTestFrDetails === null || labTestFrDetails.name.fr !== test) {
             labtest.labTestFrFetchDetails(test)
             return <div>Loading....</div>
         } else {
             const {
-                name : {fr},
+                name: { fr },
                 finance,
-                reference : {Mnemonic},
-                specimen : {nature, tubeColor, anticoagulant, numberoftube,  volumemin}
+                reference: { Mnemonic },
+                specimen: { nature, tubeColor, anticoagulant, numberoftube, volumemin }
             } = labTestFrDetails
             return (
-                <Article.Container>
-                    <Article.Header>
-                        <Article.HeaderContainer>
-                            <Article.HeaderAvatar>
-                                <Article.HeaderAvatarIcon>
-                                    <Ico
-                                        {...atom}
-                                        width="140"
-                                        height="140"
-                                    />
-                                </Article.HeaderAvatarIcon>
-                            </Article.HeaderAvatar>
-                            <Article.HeaderAbstract>
-                                <Article.HeaderTitle>{labTestFrDetails.name.fr}</Article.HeaderTitle>
-                                <Article.HeaderSubTitle>{category ? category.split('-').join(' ') : ''}</Article.HeaderSubTitle>
-                                <Article.HeaderMiddle>
-                                    { nature ? nature.map((nature : any) =>(
-                                        <span key={nature}>
-                                            <span>{nature}</span>
-                                            <span> &nbsp;•&nbsp; </span>
-                                        </span>
-                                    ))                                    
-                                    : 
-                                    ''}
-                                </Article.HeaderMiddle>
-                                <Article.HeaderFoot>
-                                    <Article.HeaderFootAssurance>
-                                        {finance[0] ? <>
-                                            <p><Badge>
-                                                Prix Total : {Math.floor(finance[0].Bcode * 1.34)} dhs
+                <>
+                    <Helmet>
+                        <title>{labTestFrDetails.name.fr}</title>
+                        <meta name="description" content={`prix analyse ${labTestFrDetails.name.fr} aux maroc list `} />
+                        <meta name="keywords" content={`prix tarif analyse maroc ${labTestFrDetails.name.fr}`} />
+                    </Helmet>
+                    <Article.Container>
+                        <Article.Header>
+                            <Article.HeaderContainer>
+                                <Article.HeaderAvatar>
+                                    <Article.HeaderAvatarIcon>
+                                        <Ico
+                                            {...atom}
+                                            width="140"
+                                            height="140"
+                                        />
+                                    </Article.HeaderAvatarIcon>
+                                </Article.HeaderAvatar>
+                                <Article.HeaderAbstract>
+                                    <Article.HeaderTitle>{labTestFrDetails.name.fr}</Article.HeaderTitle>
+                                    <Article.HeaderSubTitle>{category ? category.split('-').join(' ') : ''}</Article.HeaderSubTitle>
+                                    <Article.HeaderMiddle>
+                                        {nature ? nature.map((nature: any) => (
+                                            <span key={nature}>
+                                                <span>{nature}</span>
+                                                <span> &nbsp;•&nbsp; </span>
+                                            </span>
+                                        ))
+                                            :
+                                            ''}
+                                    </Article.HeaderMiddle>
+                                    <Article.HeaderFoot>
+                                        <Article.HeaderFootAssurance>
+                                            {finance[0] ? <>
+                                                <p><Badge>
+                                                    Prix Total : {Math.floor(finance[0].Bcode * 1.34)} dhs
                                             </Badge></p>
-                                            <p>
-                                                <Badge bgcolor="#388e3c">
-                                                    CNSS : {Math.floor((finance[0].Bcode * 1.1) * 0.7)} dhs
+                                                <p>
+                                                    <Badge bgcolor="#388e3c">
+                                                        CNSS : {Math.floor((finance[0].Bcode * 1.1) * 0.7)} dhs
                                                 </Badge>
-                                                <Badge bgcolor="#d32f2f">
-                                                    Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.7))} dhs
+                                                    <Badge bgcolor="#d32f2f">
+                                                        Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.7))} dhs
                                                 </Badge>
-                                            </p>
-                                            <p><Badge bgcolor="#388e3c">
-                                                CNOPS : {Math.floor((finance[0].Bcode * 1.1) * 0.8)} dhs
+                                                </p>
+                                                <p><Badge bgcolor="#388e3c">
+                                                    CNOPS : {Math.floor((finance[0].Bcode * 1.1) * 0.8)} dhs
                                                 </Badge><Badge bgcolor="#d32f2f">
-                                                Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.8))} dhs
+                                                        Adherent : {Math.floor((finance[0].Bcode * 1.34) - ((finance[0].Bcode * 1.1) * 0.8))} dhs
                                                 </Badge>
-                                            </p>
-                                        </>: ''}
-                                    </Article.HeaderFootAssurance>
-                                </Article.HeaderFoot>
-                            </Article.HeaderAbstract>
-                        </Article.HeaderContainer>
-                    </Article.Header>
+                                                </p>
+                                            </> : ''}
+                                        </Article.HeaderFootAssurance>
+                                    </Article.HeaderFoot>
+                                </Article.HeaderAbstract>
+                            </Article.HeaderContainer>
+                        </Article.Header>
 
-                </Article.Container>
+                    </Article.Container>
+                </>
             )
 
         }

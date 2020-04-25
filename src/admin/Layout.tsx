@@ -114,7 +114,10 @@ const AdminLayout: React.FunctionComponent<IAppProps> = ({isAuth, username, user
                     <Route path={userRoutes.admin.usersListAll.path} 
                       component={userRoutes.admin.usersListAll.component}
                     />
-                    
+                    {/* user details */}
+                    <Route path={userRoutes.admin.userDetails.path} 
+                      component={userRoutes.admin.userDetails.component}
+                    />
                 </Wrapper.page>
               </Wrapper.content>
 

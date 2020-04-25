@@ -4,6 +4,7 @@ import { Article, Badge } from '../../../../ui-ittyni/src'
 import { Ico } from '../../../../react-icons-sc/src/ico';
 import {microscop} from '../../icon/microscop'
 import { Labos } from '../controller/Labos';
+import { Helmet } from 'react-helmet';
 
 const Labo = new Labos();
 
@@ -20,6 +21,12 @@ export const LaboDetails = ({laboDetails} : any) => {
                 account, contact : {tele, address}
             } = laboDetails
         return (
+            <>
+            <Helmet>
+                <meta name="description" content={`Laboratoire ${account.name} a fes`} />
+                <meta name="keywords" content={`Laboratoire ${account.name} prix address cnops cnss remborsement`} />
+                <title>{`Laboratoire ${account.name} - fes`}</title>
+            </Helmet>
             <Article.Container>
                 <Article.Header>
                     <Article.HeaderContainer>
@@ -47,6 +54,7 @@ export const LaboDetails = ({laboDetails} : any) => {
                     </Article.HeaderContainer>
                 </Article.Header>
             </Article.Container>
+            </>
         )}
     } else {
         return (<></>)

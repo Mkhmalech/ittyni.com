@@ -17,6 +17,8 @@ export const LabosLisiting: React.FunctionComponent<ILaboLisitingProps> = ({ lab
   if (labos) return (
     <>
     <Helmet>
+      <meta name="description" content="Listes des laboratoires medicales au maroc" />
+      <meta name="keywords" content="Liste laboratoires medicales maroc ville fes address tele fax" />
       <title>Listes des laboratoires medicales au maroc</title>
     </Helmet>
     <List.Container>
