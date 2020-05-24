@@ -63,11 +63,13 @@ export const Home: React.FunctionComponent<IHomeProps> = ({listAll, labTestFrDet
                   component={()=><routes.lab.LabTests.labTestDetail.component labTestFrDetails={labTestFrDetails}/>} exact/>
 
             {/** lab labos page */}
-            <Route path={routes.lab.Labo.Labos.path} component={()=><routes.lab.Labo.Labos.component labos={listAll} />} exact/>
+            <Route path={routes.lab.Labo.Labos.path} render={()=><routes.lab.Labo.Labos.component labos={listAll} />} exact/>
 
             {/** Lab labos details */}
             <Route path={routes.lab.Labo.LaboDetails.path} 
                   component={()=><routes.lab.Labo.LaboDetails.component laboDetails={laboDetails} />} />
+            {/* handle labos liste error */}
+            
             {/* any rout in website */}
             <Route path="/website/" render={({history})=>{
               history.push(`/analyses-medicales/Listes-prix-analyses-medicales/maroc`)
