@@ -11,7 +11,9 @@ import { History } from "history";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
-import { Home } from './website/index'
+import HomeLayout from './website/index'
+import { routes } from './routes';
+import Admin from './admin/Layout'
 
 
 interface MainProps {
@@ -27,7 +29,9 @@ const Main: React.FC<MainProps> = ({ store, history }) => {
                 <Provider store={store}>
                     <Router history={history}>
                         <Switch>
-                            <Route path="/" component={Home} />
+                            <Route path={routes.admin.path} component={Admin} />
+                            <Route path={routes.website.path} component={HomeLayout} />
+                            <Redirect from='/*' to={routes.website.path} />
                         </Switch>
                     </Router>
                 </Provider>

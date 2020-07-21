@@ -11,23 +11,20 @@ const {
 >;
 
 export interface IThemeInterface {
-  defaultColor: string,
-  primaryColor: string,
-  secondaryColor : string,
-  thirdColor : string,
-  fourthColor : string,
-  breakpoints: {
-    small: string,
-    medium: string,
-    large: string,
-  }
+  color: {
+    defaultColor: string;
+    primaryColor: string;
+    secondaryColor: string;
+    thirdColor: string;
+    fourthColor: string;
+  },
+  font :{
+    fontSize : number,
+    fontFamily : string
+  },
+  windowHeight : number
 }
 
 export default styled;
 
-export { 
-  css, 
-  createGlobalStyle, 
-  keyframes, 
-  ThemeProvider 
-};
+export { css, createGlobalStyle, keyframes, ThemeProvider };

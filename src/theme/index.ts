@@ -1,3 +1,4 @@
+import * as device  from './media'
 export * from './styled-components'
 export * from './theme'
-export * from './media'
+export {device}

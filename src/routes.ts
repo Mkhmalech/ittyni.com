@@ -1,23 +1,16 @@
+import  Auth  from './authentification-redux-lib/src/web'
+import { labRoutes } from './lab-ittyni/src/routes';
 export const routes = {
-    // WebApp : {
-    //     Home : {
-    //         link : '/Lab/Home',
-    //         title : 'Acceuil',
-    //         component : LabTestsListingFr,
-    //         icon : ''
-    //     },
-        // Login : {
-        //     link : '/Auth',
-        //     title : 'Authenticate Page',
-        //     component : AuthPage,
-        //     icon : ''
-        // },
+    admin : {
+        path : '/admin/:user/',
+    },
+    website : {
+        path : '/website/*'       
+    },
+    auth : {
+        path : '/website/auth/*',
+        component : Auth
+    },
 
-
-        // Admin : {
-        //     link : '/Admin/',
-        //     title: 'Admininistration',
-        //     component : Admin,
-        //     icon : ''
-        // }
+    lab : labRoutes
 }

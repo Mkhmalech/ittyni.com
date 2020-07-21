@@ -1,1 +1,2 @@
-export * from './home'
+export {default} from './home'
+export * from './header'

@@ -1,0 +1,20 @@
+{
+  "name": "lab-ittyni",
+  "version": "1.0.0",
+  "description": "",
+  "types": "src/lab.d.ts",
+  "main": "src/index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mkhmalech/lab-ittyni.git"
+  },
+  "author": "khm@med",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mkhmalech/lab-ittyni/issues"
+  },
+  "homepage": "https://github.com/Mkhmalech/lab-ittyni#readme"
+}

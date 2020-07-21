@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.tsx",
+  "types": "src/react-app-env.d.ts",
   "dependencies": {
     "@types/history": "^4.7.3",
     "@types/react-helmet": "^5.0.13",

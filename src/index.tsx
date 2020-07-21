@@ -13,4 +13,6 @@ export const store = configureStore(history, initialState);
 
 const rootElement = document.getElementById("root");
 
+console.log(store.getState())
+
 ReactDOM.render(<Main store={store} history={history} />, rootElement);
